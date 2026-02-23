@@ -16,7 +16,8 @@ Permite al usuario ingresar el nombre de un libro y realizar una consulta a la A
 <img src="./img/opcion1.png" alt="Vista previa" width="600">
 
 - Se evita duplicar registros.
-  <img src="./img/opcion1.0.png" alt="Vista previa" width="600">
+
+<img src="./img/opcion1.0.png" alt="Vista previa" width="600">
 
 
 ---
