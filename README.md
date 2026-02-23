@@ -98,7 +98,7 @@ LiterAlura/
 │   │   │   ├── LiteraluraApplication.java
 │   │   │   │        → Clase principal que inicia la aplicación
 │   │   │   │          y contiene el menú interactivo en consola.
-│   │   │   │
+│   │   │
 │   │   │   ├── model/
 │   │   │   │   ├── Libro.java
 │   │   │   │   │        → Entidad JPA que representa un libro en la base de datos.
@@ -131,9 +131,19 @@ LiterAlura/
 │   │   │              a la API Gutendex.
 │   │   │
 │   │   └── resources/
-│   │       └── application.properties
-│   │            → Configuración de conexión a PostgreSQL
-│   │              y propiedades de JPA.
+│   │       ├── application.properties
+│   │       │        → Configuración de conexión a PostgreSQL
+│   │       │          y propiedades de JPA.  
+│   │       │          → Incluye:
+│   │       │            spring.sql.init.schema-locations=classpath:schema.sql
+│   │       │            spring.sql.init.data-locations=classpath:data.sql
+│   │       │
+│   │       ├── schema.sql
+│   │       │        → Contiene la estructura de la base de datos:
+│   │       │          tablas 'autor' y 'libro'.
+│   │       │
+│   │       └── data.sql
+│   │                → Contiene datos de prueba para 'autor' y 'libro'.
 │   │
 │   └── test/
 │       └── DemoApplicationTests.java
