@@ -1,59 +1,144 @@
-# 💱 Convertidor de Monedas
+# 📚 LiterAlura
 
-### 💱 🔎 Funcionamiento General
-Este proyecto es un convertidor de monedas que funciona desde la consola. El programa muestra un menú con varias opciones de conversión entre dólar, peso argentino, real brasileño y peso colombiano.
+## 📋 Funcionalidades del Sistema
+La aplicación LiterAlura permite consultar libros desde la API Gutendex, almacenarlos en una base de datos PostgreSQL y realizar diferentes consultas a través de un menú interactivo en consola.
 
-### 🖥️ 📋 Menú de Opciones
-El programa muestra un menú con varias opciones de conversión:
+<img src="./img/menu.png" alt="Vista previa" width="600">
 
-<img src="./img-readme/Menu.png" alt="Vista previa" width="600">
 
----
-### ✍️ 💵 Ingreso de Valores
-El usuario debe seleccionar una opción e ingresar el valor que desea convertir. Luego, el sistema realiza el cálculo y muestra:
+- ### 🔎 1️⃣ Buscar libro por título
+Permite al usuario ingresar el nombre de un libro y realizar una consulta a la API Gutendex.
+- Si el libro existe:
+- Se muestran sus datos en consola.
+- Se guarda en la base de datos.
+- Se almacena también su autor (si no existe previamente).
 
-- La moneda base seleccionada.
-- La tasa de cambio utilizada.
-- El valor final convertido.
+<img src="./img/opcion1.png" alt="Vista previa" width="600">
 
-<img src="./img-readme/Ejecucion.png" alt="Vista previa" width="600">
+- Se evita duplicar registros.
+  <img src="./img/opcion1.0.png" alt="Vista previa" width="600">
 
----
-
-### 🔁 ⏹️ Ejecución Continua
-
-El programa se ejecuta de manera continua, permitiendo realizar varias conversiones, y solo finaliza cuando el usuario selecciona la opción 7 (Salir).
-
-<img src="./img-readme/Salir.png" alt="Vista previa" width="600">
 
 ---
+
+- ### 📚 2️⃣ Listar libros registrados
+Muestra todos los libros almacenados en la base de datos con su información principal:
+- Título
+- Idioma
+- Número de descargas
+  <img src="./img/opcion2.png" alt="Vista previa" width="600">
+
+---
+
+- ### ✍ 3️⃣ Listar autores registrados
+Muestra todos los autores guardados en la base de datos junto con:
+- Nombre
+- Año de nacimiento
+- Año de fallecimiento
+  <img src="./img/opcion3.png" alt="Vista previa" width="600">
+
+---
+
+- ### 📅 4️⃣ Listar autores vivos en un determinado año
+Permite ingresar un año específico y muestra los autores que estaban vivos en esa fecha.
+
+Se considera que un autor estaba vivo si:
+- Nació antes o en ese año
+- Y no había fallecido aún
+  <img src="./img/opcion4.png" alt="Vista previa" width="600">
+
+---
+
+- ### 🌎 5️⃣ Listar libros por idioma
+Permite consultar los libros almacenados filtrando por idioma.
+
+Ejemplos de idiomas:
+- es → Español
+- en → Inglés
+- fr → Francés
+- pt → Portugués
+  <img src="./img/opcion5.png" alt="Vista previa" width="600">
+
+---
+
+## 🧠 Lógica Implementada
+
+✔ Consumo de API externa (Gutendex)
+
+✔ Mapeo de JSON usando record
+
+✔ Persistencia con Spring Data JPA
+
+✔ Relación ManyToOne (Libro → Autor)
+
+✔ Validación para evitar duplicados
+
+✔ Consultas personalizadas con Query Methods
+
+---
+
+
 
 ## 📂 Estructura del Proyecto
 
 ```plaintext
-Convertidor Moneda/
+LiterAlura/
 │
-├── .idea/                 → Archivos de configuración del entorno (IDE).
+├── .mvn/                          → Archivos del wrapper de Maven.
 │
-├── img-readme/            → Imágenes utilizadas en el README.
-│   ├── Ejecucion.png
-│   └── Menu.png
-│
-├── out/                   → Archivos compilados automáticamente.
-│
-├── src/                   → Código fuente del proyecto.
-│   ├── Main.java          → Contiene el menú principal, la lógica de interacción
-│   │                         con el usuario y la consulta a la API.
+├── src/
+│   ├── main/
+│   │   ├── java/com/alura/challenge/katte/demo/
+│   │   │
+│   │   │   ├── LiteraluraApplication.java
+│   │   │   │        → Clase principal que inicia la aplicación
+│   │   │   │          y contiene el menú interactivo en consola.
+│   │   │   │
+│   │   │   ├── model/
+│   │   │   │   ├── Libro.java
+│   │   │   │   │        → Entidad JPA que representa un libro en la base de datos.
+│   │   │   │   │
+│   │   │   │   ├── Autor.java
+│   │   │   │   │        → Entidad JPA que representa un autor.
+│   │   │   │   │
+│   │   │   │   ├── DatosLibro.java
+│   │   │   │   │        → Record utilizado para mapear la respuesta
+│   │   │   │   │          JSON de la API.
+│   │   │   │   │
+│   │   │   │   ├── DatosAutor.java
+│   │   │   │   │        → Record para mapear los datos del autor
+│   │   │   │   │          provenientes de la API.
+│   │   │   │   │
+│   │   │   │   └── DatosRespuesta.java
+│   │   │   │            → Record que representa la estructura
+│   │   │   │              completa de la respuesta de la API.
+│   │   │   │
+│   │   │   ├── repository/
+│   │   │   │   ├── LibroRepository.java
+│   │   │   │   │        → Interfaz JPA para operaciones CRUD de libros.
+│   │   │   │   │
+│   │   │   │   └── AutorRepository.java
+│   │   │   │            → Interfaz JPA para operaciones CRUD de autores.
+│   │   │   │
+│   │   │   └── service/
+│   │   │       └── ConsumoAPI.java
+│   │   │            → Clase encargada de realizar la petición HTTP
+│   │   │              a la API Gutendex.
+│   │   │
+│   │   └── resources/
+│   │       └── application.properties
+│   │            → Configuración de conexión a PostgreSQL
+│   │              y propiedades de JPA.
 │   │
-│   ├── Moneda.java        → Clase que representa una moneda (id y código).
-│   │
-│   └── ExchangeResponse.java
-│                           → Clase utilizada para mapear la respuesta
-│                             recibida desde la API de tasas de cambio.
+│   └── test/
+│       └── DemoApplicationTests.java
+│            → Clase de pruebas generada por Spring Boot.
 │
-├── .gitignore             → Archivos que no se incluyen en el repositorio.
+├── pom.xml                          → Archivo de configuración de dependencias Maven.
 │
-├── Convertidor Moneda.iml → Archivo de configuración del proyecto.
+├── mvnw / mvnw.cmd                  → Maven Wrapper.
 │
-└── README.md              → Documento de descripción del proyecto.
+├── .gitignore                       → Archivos excluidos del repositorio.
+│
+└── README.md                        → Documento descriptivo del proyecto.
 ````
