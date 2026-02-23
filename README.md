@@ -27,7 +27,8 @@ Muestra todos los libros almacenados en la base de datos con su información pri
 - Título
 - Idioma
 - Número de descargas
-  <img src="./img/opcion2.png" alt="Vista previa" width="600">
+
+<img src="./img/opcion2.png" alt="Vista previa" width="600">
 
 ---
 
@@ -36,7 +37,8 @@ Muestra todos los autores guardados en la base de datos junto con:
 - Nombre
 - Año de nacimiento
 - Año de fallecimiento
-  <img src="./img/opcion3.png" alt="Vista previa" width="600">
+
+<img src="./img/opcion3.png" alt="Vista previa" width="600">
 
 ---
 
@@ -46,7 +48,8 @@ Permite ingresar un año específico y muestra los autores que estaban vivos en 
 Se considera que un autor estaba vivo si:
 - Nació antes o en ese año
 - Y no había fallecido aún
-  <img src="./img/opcion4.png" alt="Vista previa" width="600">
+
+<img src="./img/opcion4.png" alt="Vista previa" width="600">
 
 ---
 
@@ -58,7 +61,8 @@ Ejemplos de idiomas:
 - en → Inglés
 - fr → Francés
 - pt → Portugués
-  <img src="./img/opcion5.png" alt="Vista previa" width="600">
+
+<img src="./img/opcion5.png" alt="Vista previa" width="600">
 
 ---
 
